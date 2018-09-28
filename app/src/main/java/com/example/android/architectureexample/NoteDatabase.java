@@ -13,10 +13,14 @@ import android.support.annotation.NonNull;
  */
 @Database(entities = {Note.class}, version = 1)
 public abstract class NoteDatabase extends RoomDatabase {
+    //singelton
     private static NoteDatabase instance;
 
     public abstract NoteDao noteDao();
 
+    // synchronized means only one thread at the time allowed to access this method so you don't
+    // accidentally  create 2 instances of this database when 2 different threads try to access this
+    // at the same time.
     public static synchronized NoteDatabase getInstance(Context context) {
         if (instance == null) {
             instance = Room.databaseBuilder(context.getApplicationContext(),
