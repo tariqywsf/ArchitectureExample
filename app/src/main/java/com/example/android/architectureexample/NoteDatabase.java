@@ -23,6 +23,7 @@ public abstract class NoteDatabase extends RoomDatabase {
     // at the same time.
     public static synchronized NoteDatabase getInstance(Context context) {
         if (instance == null) {
+            // we use database builder because instance is singelton.
             instance = Room.databaseBuilder(context.getApplicationContext(),
                     NoteDatabase.class, "note_database")
                     .fallbackToDestructiveMigration()
